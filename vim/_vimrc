@@ -1,0 +1,92 @@
+set nocompatible               " vim compatiblity
+set nowrap                     " no line wrapping
+set noerrorbells               " no annoying bells
+set number                     " line numbers on
+set numberwidth=5              " line number ok up until 99999
+set ruler                      " always show current cursor position
+set showmatch                  " show matching parens
+set tabstop=4                  " tab stop = 4 spaces
+set softtabstop=4              " tab stop = 4 spaces
+set shiftwidth=4               " auto indent = 4 spaces
+set noexpandtab				   " insert tabs not spaces
+set autoindent                 " auto indent on
+set smartindent                " C/C++ style indenting
+set nobackup                   " backup off
+set linespace=0                " no extra space between lines
+set history=50                 " keep up to 50 commands in history
+set hlsearch                   " highlight search
+set ignorecase                 " ignore case on search
+set smartcase                  " accept for when caps are used in the search
+set report=0                   " report if file has changed outside of vim
+set fileformat=unix            " default to unix file fornat
+set fileformats=unix,dos       " dos as a backup format
+set hidden                     " allow changing buffers w/o saving first
+
+set shell=powershell           " tie vim to powershell
+set shellcmdflag=-command      " vim/powershell setting 
+
+filetype plugin on             " enable filetype detection
+filetype plugin indent on      " enable language-dependend indenting
+syntax on                      " syntax highlighting on
+
+" set default working directory
+cd $USERPROFILE/src
+
+" Persistent Undo
+set undofile
+set undolevels=1000
+set undoreload=9999
+set undodir=$Home/vimfiles/.vimundo//
+
+" Move the swap file from the current directory to $TEMP
+set dir=$Temp//
+
+""""""""""""""""""""
+"" KEY REMAPPINGS ""
+""""""""""""""""""""
+"disable arrow keys
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+" map jk key sequence to escape insert mode 
+inoremap jk <ESC> 
+" auto close parens, brackets, quotes
+inoremap {    {}<Left>
+inoremap (    ()<Left>
+inoremap [    []<Left>
+inoremap "    ""<Left>
+inoremap '    ''<Left>
+" window navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+" clear highlighted search
+noremap <silent> ,/ :nohlsearch<CR>
+
+if has("gui_running")
+    colorscheme monokai
+    set cursorline
+    set gfn=Consolas:h10:cANSI  " font: consolas 10 point
+    set columns=130             " set the window width
+    set lines=32                " set the window height
+    set guioptions-=T			" Hide toolbar
+    set guioptions-=r			" Hide scrollbar
+	set guioptions-=L           " Hide NERD Tree scrollbar
+    set guioptions-=m			" Hide menu    
+
+	" show/hide file browser by keying \f
+	noremap <leader>f :NERDTreeToggle<CR>
+	" show / hide menu by keying \m
+	noremap <leader>m :if &guioptions =~# 'm'<Bar>set guioptions-=m<bar>else<Bar>set guioptions+=m<Bar>endif<CR>
+	" show / hide menu with the Ctrl-F12 key combo
+    "nnoremap <C-F12> : if &guioptions=~#'m'<Bar>set guioptions-=m<bar>else<Bar>set guioptions+=m<Bar>endif<CR>
+else
+	set mouse=a                 " allow the mouse in the command line vim
+	colorscheme pablo 
+endif

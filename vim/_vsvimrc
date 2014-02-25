@@ -1,0 +1,18 @@
+set expandtab                   " convert tabs to spaces
+set tabstop=3					" tab stop = 4 spaces
+set shiftwidth=3				" auto indent = 4 spaces
+set autoindent					" auto indent on
+set history=50					" keep up to 50 commands in history
+set number						" turn the line numbers on
+
+set hlsearch					" highlight search
+set ignorecase					" ignore case on search
+set smartcase					" accept for when caps are used in the search
+
+" Disable the arrow keys
+map <down> <nop>
+map <up> <nop>
+map <right> <nop>
+map <left> <nop>
+" map jk key sequence to escape 
+imap jk <ESC>
