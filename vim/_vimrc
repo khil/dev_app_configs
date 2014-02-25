@@ -29,6 +29,9 @@ filetype plugin on             " enable filetype detection
 filetype plugin indent on      " enable language-dependend indenting
 syntax on                      " syntax highlighting on
 
+" autoload close tag script for html & xml
+au FileType html,xml,xsl source $VIMRUNTIME/plugin/closetag.vim
+
 " set default working directory
 cd $USERPROFILE/src
 
