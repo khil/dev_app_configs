@@ -17,7 +17,9 @@ Set-Alias untar unpack
 Set-Alias activate c:\python\64bit\virt_env\activate_ve.ps1
 Set-Alias start-vs start-visual-studio-cmd-prompt
 
-$env:Path += $Env:UserProfile + "\bin\;" + $Env:UserProfile + "\scripts\;" + $Env:UserProfile + "\bin\putty\;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319;C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC"
+$Env:Path += $Env:UserProfile + "\bin\;" + $Env:UserProfile + "\scripts\;" + $Env:UserProfile + "\bin\putty\;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319;C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC"
+
+$Env:PYTHONSTARTUP = $Env:UserProfile + "\src\python\startup.py"
 
 $host.ui.rawui.WindowTitle = "psh v" + $Host.Version
 
