@@ -1,8 +1,9 @@
+Set-Alias rdp mstsc
 Set-Alias gvi start-vi
 Set-Alias gvim start-vi
 Set-Alias vi start-vi
 Set-Alias vim start-vi
-#Set-Alias ed ($env:USERPROFILE + "\bin\Ted\TedNPad.exe")
+#Set-Alias ed ($env:HOMEDRIVE + $env:USERPROFILE + "\bin\Ted\TedNPad.exe")
 Set-Alias gs Get-Service
 Set-Alias l List-Wide
 Set-Alias ll Get-ChildItem
@@ -17,13 +18,12 @@ Set-Alias untar unpack
 Set-Alias activate c:\python\64bit\virt_env\activate_ve.ps1
 Set-Alias start-vs start-visual-studio-cmd-prompt
 
-$Env:Path += $Env:UserProfile + "\bin\;" + $Env:UserProfile + "\scripts\;" + $Env:UserProfile + "\bin\putty\;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319;C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC"
-
-$Env:PYTHONSTARTUP = $Env:UserProfile + "\src\python\startup.py"
+$Env:PYTHONSTARTUP=$Env:UserProfile + "\src\python\startup.py"
+$env:Path += $env:UserProfile + "\bin\;" + $env:UserProfile + "\scripts\;" + $env:UserProfile + "\bin\putty\;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319;C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC"
 
 $host.ui.rawui.WindowTitle = "psh v" + $Host.Version
 
-cd $Env:UserProfile
+cd c:\Users\khildreth.nvfel
 
 ##
 ## create an artificial command to go back up a directory tree
@@ -41,10 +41,18 @@ for ($i = 1; $i -le 6; $i++) {
 }
 
 function list-wide {
-	Get-ChildItem | Select-Object name | Format-Wide -AutoSize
+    #Get-ChildItem | Select-Object name | Format-Wide -AutoSize
+    Invoke-Expression ("Get-ChildItem $args") | ForEach-Object {
+        if ($_.psiscontainer) {
+            '[{0}]' -f $_.Name
+        } else {
+            $_.Name
+        }
+    } | Format-Wide {$_} -AutoSize -Force	
 }
 
 function prompt {
+
 	##Write-Host ($(Get-Location).Path.Replace('\','/') + ">") -NoNewLine -BackgroundColor Gray -ForegroundColor Black
 	Write-Host ($(Get-Location).Path.Replace('\','/') + ">") -NoNewLine -ForegroundColor DarkCyan
 	return " "
