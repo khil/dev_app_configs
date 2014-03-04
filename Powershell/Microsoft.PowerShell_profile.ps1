@@ -23,7 +23,7 @@ $env:Path += $env:UserProfile + "\bin\;" + $env:UserProfile + "\scripts\;" + $en
 
 $host.ui.rawui.WindowTitle = "psh v" + $Host.Version
 
-cd c:\Users\khildreth.nvfel
+cd $Env:UserProfile
 
 ##
 ## create an artificial command to go back up a directory tree
